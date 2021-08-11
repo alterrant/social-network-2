@@ -5,10 +5,10 @@ import Persona from "./Persona/Persona";
 function MainBasic(props) {
 
     const persons = [
-        props.mainBasicPersons.map( person => <Persona name={person.name} id={person.id}/>)
+        props.personsData.map( person => <Persona name={person.name} id={person.id}/>)
     ]
     const messages = [
-        props.mainBasicMessages.map( message => <Message id={message.id}/>)
+        props.messagesData.map( message => <Message id={message.id}/>)
     ]
 
     return (

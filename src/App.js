@@ -14,8 +14,8 @@ function App(props) {
             <Header/>
             <Nav/>
             <div className='main-wrapper-basic'>
-                <Route path = '/profile' component = { () => <Main  postIndex={props.postIndex}/> }/>
-                <Route path = '/message' component = { () => <MainBasic personIndex={props.personIndex} messageIndes={props.messageIndes} /> }/>
+                <Route path = '/profile' component = { () => <Main  myPostsData={props.state.mainBasicPage.myPostsData}/> }/>
+                <Route path = '/message' component = { () => <MainBasic personsData={props.state.mainPostsPage.personsData} messagesData={props.state.mainPostsPage.messagesData} /> }/>
                 <Route path = '/news' component = {MainBasic}/>
                 <Route path = '/music' component = {MainBasic}/>
                 <Route path = '/settings' component = {MainBasic}/>

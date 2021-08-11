@@ -1,0 +1,23 @@
+.nav {
+    padding-left: 10px;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    background-color: green;
+    font-size: 18px;
+}
+
+.nav a:hover {
+    color: blueviolet;
+}
+
+.liText {
+    color: white;
+}
+
+.translocation:hover {
+    transition-duration: 0.56s;
+}
+
+.activeLink {
+    color: darkslateblue;
+}

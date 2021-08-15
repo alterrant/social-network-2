@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import Header from "./components/Header/Header";
@@ -12,7 +11,7 @@ function App(props) {
       <BrowserRouter>
         <div className='main-wrapper'>
             <Header/>
-            <Nav/>
+            <Nav sitebar={props.state.sitebar}/>
             <div className='main-wrapper-basic'>
                 <Route path = '/profile' component = { () => <Main  myPostsData={props.state.mainBasicPage.myPostsData}/> }/>
                 <Route path = '/message' component = { () => <MainBasic personsData={props.state.mainPostsPage.personsData} messagesData={props.state.mainPostsPage.messagesData} /> }/>

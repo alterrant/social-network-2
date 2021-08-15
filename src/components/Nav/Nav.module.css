@@ -9,15 +9,3 @@
 .nav a:hover {
     color: blueviolet;
 }
-
-.liText {
-    color: white;
-}
-
-.translocation:hover {
-    transition-duration: 0.56s;
-}
-
-.activeLink {
-    color: darkslateblue;
-}

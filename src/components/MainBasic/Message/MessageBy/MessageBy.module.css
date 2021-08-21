@@ -1,0 +1,18 @@
+.block {
+    min-width: min-content;
+    max-width: 40%;
+    min-height: 30px;
+    max-height: max-content;
+    background-color: #61dafb;
+    border-radius: 8px;
+}
+
+.li {
+    padding-bottom: 1%;
+    display: flex;
+    position: relative;
+}
+
+.li p {
+    margin: 7% auto 7%;
+}

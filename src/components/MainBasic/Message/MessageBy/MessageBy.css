@@ -1,0 +1,13 @@
+.me {
+    justify-content: flex-start;
+}
+
+.persona {
+    justify-content: flex-end;
+    text-align: end;
+}
+
+.me,
+.persona p {
+    padding: 0 5px;
+}

@@ -1,7 +1,6 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
 
-
 function AddMessage() {
 
     const newMessage = React.createRef();
@@ -13,7 +12,7 @@ function AddMessage() {
     return (
         <div className={AddMessageStyle.textArea}>
             <div>
-                <textarea name="textMessage" ref={newMessage} cols="50" rows="2" placeholder={'Написать сообщение'}></textarea>
+                <textarea className={AddMessageStyle.text} name="textMessage" ref={newMessage} cols="50" rows="2" placeholder={'Написать сообщение'}></textarea>
             </div>
             <div>
                 <button onClick={ addMessage }>

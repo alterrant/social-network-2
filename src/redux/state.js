@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../rerenderEntireTree";
+let rerenderEntireTree = () => {
+    console.log('sdfadfs')
+}
 
 let state = {
     mainBasicPage: {
@@ -58,7 +60,7 @@ let state = {
     }
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
     let newMessage = {
         id: '6', name: 'me', message: state.mainPostsPage.textNewMessage
     }
@@ -69,10 +71,14 @@ export let addMessage = () => {
 
 }
 
-export let updateNewTextMessage = (textMessage) => {
+export const updateNewTextMessage = (textMessage) => {
     state.mainPostsPage.textNewMessage = textMessage;
     rerenderEntireTree(state);
     console.log(state.mainPostsPage.textNewMessage);
+}
+
+export const subscribe = (observe) => {
+    rerenderEntireTree = observe;
 }
 
 export default state;

@@ -16,7 +16,9 @@ function MainBasic(props) {
     ]
     const newMessage = [
         props.personsData.map( person => {
-            return <Route path = {'/message/' + person.name} component = { () => <AddMessage/>}/>
+            return <Route path = {'/message/' + person.name} component = { () => <AddMessage newMessage={props.newMessage}
+                                                                                             textNewMessage={props.textNewMessage}
+                                                                                             updateNewTextMessage={props.updateNewTextMessage}/>}/>
         })
     ]
 

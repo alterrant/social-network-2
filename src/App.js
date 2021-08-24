@@ -14,7 +14,11 @@ function App(props) {
             <Nav sitebar={props.state.sitebar}/>
             <div className='main-wrapper-basic'>
                 <Route path = '/profile' component = { () => <Main  myPostsData={props.state.mainBasicPage.myPostsData}/> }/>
-                <Route path = '/message' component = { () => <MainBasic personsData={props.state.mainPostsPage.personsData} messagesData={props.state.mainPostsPage.messagesData} /> }/>
+                <Route path = '/message' component = { () => <MainBasic personsData={props.state.mainPostsPage.personsData}
+                                                                        messagesData={props.state.mainPostsPage.messagesData}
+                                                                        newMessage={props.addMessage}
+                                                                        textNewMessage={props.state.mainPostsPage.textNewMessage}
+                                                                        updateNewTextMessage={props.updateNewTextMessage}/> }/>
                 <Route path = '/news' component = {MainBasic}/>
                 <Route path = '/music' component = {MainBasic}/>
                 <Route path = '/settings' component = {MainBasic}/>

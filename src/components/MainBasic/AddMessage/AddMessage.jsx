@@ -1,21 +1,32 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
 
-function AddMessage() {
+function AddMessage(prop) {
+    const newMessageRef = React.createRef();
 
-    const newMessage = React.createRef();
-    const addMessage = () => {
-        const textNewMessage = newMessage.current.value;
-        alert(textNewMessage);
+    const addNewMessage = () => {
+        prop.newMessage();
+    }
+
+
+    const updateNewMessageTextArea = () => {
+        let newMessageRefTextArea = newMessageRef.current.value;
+        prop.updateNewTextMessage(newMessageRefTextArea);
     }
 
     return (
         <div className={AddMessageStyle.textArea}>
             <div>
-                <textarea className={AddMessageStyle.text} name="textMessage" ref={newMessage} cols="50" rows="2" placeholder={'Написать сообщение'}></textarea>
+                <textarea className={AddMessageStyle.text} onChange={updateNewMessageTextArea}
+                          name="textMessage"
+                          ref={newMessageRef}
+                          cols="50"
+                          rows="2"
+                          placeholder={'Написать сообщение'}
+                          value={prop.textNewMessage}/>
             </div>
             <div>
-                <button onClick={ addMessage }>
+                <button onClick={addNewMessage}>
                     AddPost
                 </button>
             </div>

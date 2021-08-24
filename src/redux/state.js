@@ -1,4 +1,6 @@
-const state = {
+import {rerenderEntireTree} from "../rerenderEntireTree";
+
+let state = {
     mainBasicPage: {
         myPostsData: [
             {id: '0', name: 'Vasya: ', say: 'Hi', likes: '0'},
@@ -32,6 +34,7 @@ const state = {
                 {id: '5', name: 'persona', message: 'messagePersona3'}
             ]
         },
+        textNewMessage: ''
     },
     sitebar: {
         links: ['profile', 'message', 'news', 'music', 'settings'],
@@ -55,4 +58,22 @@ const state = {
     }
 }
 
+export let addMessage = () => {
+    let newMessage = {
+        id: '6', name: 'me', message: state.mainPostsPage.textNewMessage
+    }
+    //Чтобы изменить push в первого человека, нужно изменить ниже .persona1
+    state.mainPostsPage.messagesData.persona1.push(newMessage);
+    state.mainPostsPage.textNewMessage = '';
+    rerenderEntireTree(state);
+
+}
+
+export let updateNewTextMessage = (textMessage) => {
+    state.mainPostsPage.textNewMessage = textMessage;
+    rerenderEntireTree(state);
+    console.log(state.mainPostsPage.textNewMessage);
+}
+
 export default state;
+

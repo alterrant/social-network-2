@@ -5,13 +5,12 @@ function AddMessage(prop) {
     const newMessageRef = React.createRef();
 
     const addNewMessage = () => {
-        prop.newMessage();
+        prop.dispatch( {type: 'ADD-MESSAGE', newMessage: prop.person} );
     }
-
 
     const updateNewMessageTextArea = () => {
         let newMessageRefTextArea = newMessageRef.current.value;
-        prop.updateNewTextMessage(newMessageRefTextArea);
+        prop.dispatch( {type: 'UPDATE-NEW-TEXT-MESSAGE', updateNewTextMessage: newMessageRefTextArea} );
     }
 
     return (

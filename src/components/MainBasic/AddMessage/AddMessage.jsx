@@ -1,16 +1,17 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
+import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from "../../../redux/state";
 
 function AddMessage(prop) {
     const newMessageRef = React.createRef();
 
     const addNewMessage = () => {
-        prop.dispatch( {type: 'ADD-MESSAGE', newMessage: prop.person} );
+        prop.dispatch( addNewMessageActionCreator(prop.person) );
     }
 
     const updateNewMessageTextArea = () => {
         let newMessageRefTextArea = newMessageRef.current.value;
-        prop.dispatch( {type: 'UPDATE-NEW-TEXT-MESSAGE', updateNewTextMessage: newMessageRefTextArea} );
+        prop.dispatch( updateNewMessageTextAreaActionCreator(newMessageRefTextArea) );
     }
 
     return (

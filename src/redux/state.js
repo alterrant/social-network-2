@@ -1,3 +1,6 @@
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_TEXT_MESSAGE =  'UPDATE-NEW-TEXT-MESSAGE';
+
 let store = {
     _state: {
         mainBasicPage: {
@@ -78,4 +81,9 @@ let store = {
         }
     }
 }
+export const addNewMessageActionCreator = (somePerson) => ({type: ADD_MESSAGE, newMessage: somePerson});
+export const updateNewMessageTextAreaActionCreator = (newMessageRefTextArea) => {
+    return {type: UPDATE_NEW_TEXT_MESSAGE, updateNewTextMessage: newMessageRefTextArea}
+}
+
 export default store;

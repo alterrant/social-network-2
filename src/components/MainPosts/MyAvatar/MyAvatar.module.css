@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 2% 1% 0 1%;
+    margin-bottom: 4%;
+    display: flex;
+    align-items: center;
+    column-gap: 1%;
+}
+
+.wrapper img {
+    width: 120px;
+    height: 120px;
+    border-radius: 20% 50% 20% 50%;
+}

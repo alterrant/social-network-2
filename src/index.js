@@ -14,8 +14,8 @@ let rerenderEntireTree = (state) => {
     );
 }
 //Порядок функций rerenderEntireTree(state) и  subscribe(rerenderEntireTree) ни на что не влияем (пока)
-rerenderEntireTree(store.dispatch({ type: 'GET-STATE'}));
-store.dispatch({type: 'SUBSCRIBE', observe: rerenderEntireTree});
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderEntireTree);
 
 
 // If you want to start measuring performance in your app, pass a function

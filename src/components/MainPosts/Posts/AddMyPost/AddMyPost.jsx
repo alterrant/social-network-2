@@ -3,7 +3,7 @@ import React from 'react';
 import {
   addMyPostMessageActionCreator,
   updateMyPostMessageTextAreaActionCreator,
-} from "../../../../redux/state";
+} from "../../../../redux/mainBasicPage-reducer";
 
 function AddMyPost(prop) {
 

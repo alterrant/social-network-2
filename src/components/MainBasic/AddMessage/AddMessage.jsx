@@ -1,6 +1,6 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
-import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from "../../../redux/state";
+import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from "../../../redux/mainPostsPage-reducer";
 
 function AddMessage(prop) {
     const newMessageRef = React.createRef();

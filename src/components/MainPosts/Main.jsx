@@ -1,16 +1,16 @@
-import Post from "./Post/Post";
 import MainStyle from './Main.module.css'
 import Avatar from "./MyAvatar/MyAvatar";
+import Posts from "./Posts/Posts";
 
 function Main(props) {
-    let myPost = [
-        props.myPostsData.map( postData => <Post name={postData.name} say={postData.say}/>)
-    ]
-
     return (
         <div className={MainStyle.main}>
-            <Avatar/>
-            { myPost }
+            <img
+                src="https://w-dog.ru/wallpapers/9/16/338082645671935/ssha-gavaji-gavajskie-ostrova-kailua-lanikaj-mokulua-ostrova-lanikaj-plyazh-tixij-okean-more-okean-plyazh-nebo-zima-fevral-ade-xopkins-foto.jpg"
+                alt="peach"/>
+            <Avatar myDescription={props.myPostsData}/>
+            <Posts myPosts={props.myPostsData}
+                   dispatch={props.dispatch}/>
         </div>
     );
 }

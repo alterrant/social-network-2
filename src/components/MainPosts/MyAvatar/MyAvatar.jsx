@@ -1,12 +1,10 @@
 import AvatarStyle from './MyAvatar.module.css'
 
-function Avatar() {
+function Avatar(props) {
     return (
-        <div>
-            <img
-                src="https://w-dog.ru/wallpapers/9/16/338082645671935/ssha-gavaji-gavajskie-ostrova-kailua-lanikaj-mokulua-ostrova-lanikaj-plyazh-tixij-okean-more-okean-plyazh-nebo-zima-fevral-ade-xopkins-foto.jpg"
-                alt="peach"/>
-            <p>My ava+description</p>
+        <div className={AvatarStyle.wrapper}>
+            <img src={props.myDescription.myDescription.img} alt="myAvatar"/>
+            <p>{props.myDescription.myDescription.description}</p>
         </div>
     )
 }

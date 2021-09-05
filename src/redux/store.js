@@ -83,9 +83,9 @@ let store = {
 
         dispatch(action) {
 
-          mainBasicReducer(this._state.mainBasicPage.myPosts, action);
-          mainPostsReducer(this._state.mainPostsPage, action);
-          siterbarReducer();
+          this._state.mainBasicPage.myPosts = mainBasicReducer(this._state.mainBasicPage.myPosts, action);
+          this._state.mainPostsPage = mainPostsReducer(this._state.mainPostsPage, action);
+          this._state.sitebar = siterbarReducer(this._state.sitebar, action);
           this._callSubscriber(this._state);
         }
 }

@@ -12,8 +12,7 @@ function App(props) {
             <Header/>
             <Nav sitebar={props.state.sitebar}/>
             <div className='main-wrapper-basic'>
-                <Route path = '/profile' component = { () => <Main  myPostsData={props.state.mainBasicPage}
-                                                                    dispatch={props.dispatch}/> }/>
+                <Route path = '/profile' component = { () => <Main  myPostsData={props.state.mainBasicPage} store={props.store}/> }/>
                 <Route path = '/message' component = { () => <MainBasic personsData={props.state.mainPostsPage.personsData}
                                                                         messagesData={props.state.mainPostsPage.messagesData}
                                                                         textNewMessage={props.state.mainPostsPage.textNewMessage}

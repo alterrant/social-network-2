@@ -3,11 +3,9 @@ import Link from "./Links/Link";
 import Friends from "./Friends/Friends";
 
 function Nav(prop) {
-
     const navLinks = [
        prop.sitebar.links.map( linkName => <Link name={linkName}/>)
     ]
-
     return (
         <div className = {NavStyle.nav}>
             <ul className = {NavStyle.ul}>

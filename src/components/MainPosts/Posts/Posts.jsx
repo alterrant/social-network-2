@@ -1,6 +1,6 @@
 import Post from "./Post/Post";
-import AddMyPost from "./AddMyPost/AddMyPost";
 import PostsStyle from './Posts.module.css'
+import AddMyPostContainer from "./AddMyPost/AddMyPostContainer";
 
 function Posts(props) {
     let myPost = [
@@ -9,7 +9,7 @@ function Posts(props) {
     return (
         <div className={PostsStyle.wrapper}>
             {myPost}
-            <AddMyPost myPosts={props.myPosts.myPosts} dispatch={props.dispatch}/>
+            <AddMyPostContainer store={props.store}/>
         </div>
     )
 }

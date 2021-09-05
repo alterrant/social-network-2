@@ -9,8 +9,7 @@ function Main(props) {
                 src="https://w-dog.ru/wallpapers/9/16/338082645671935/ssha-gavaji-gavajskie-ostrova-kailua-lanikaj-mokulua-ostrova-lanikaj-plyazh-tixij-okean-more-okean-plyazh-nebo-zima-fevral-ade-xopkins-foto.jpg"
                 alt="peach"/>
             <Avatar myDescription={props.myPostsData}/>
-            <Posts myPosts={props.myPostsData}
-                   dispatch={props.dispatch}/>
+            <Posts myPosts={props.myPostsData} store={props.store}/>
         </div>
     );
 }

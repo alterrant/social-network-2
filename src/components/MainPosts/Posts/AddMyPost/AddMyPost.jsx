@@ -1,19 +1,15 @@
 import AddMessageStyle from './AddMyPost.module.css';
 import React from 'react';
-import {
-  addMyPostMessageActionCreator,
-  updateMyPostMessageTextAreaActionCreator,
-} from "../../../../redux/mainBasicPage-reducer";
 
-function AddMyPost(prop) {
+function AddMyPost(props) {
 
     const addMyPostMessage = () => {
-        prop.dispatch( addMyPostMessageActionCreator() );
+        props.addMyPostMessage();
     }
 
     const updateNewMessageTextArea = (e) => {
         let newMessageRefTextArea = e.target.value;
-        prop.dispatch( updateMyPostMessageTextAreaActionCreator(newMessageRefTextArea) );
+        props.updateNewMessageTextArea(newMessageRefTextArea);
     }
 
     return (
@@ -24,7 +20,7 @@ function AddMyPost(prop) {
                           cols="50"
                           rows="2"
                           placeholder={'Написать сообщение'}
-                          value={prop.myPosts.textMynewMessage}/>
+                          value={props.myPosts}/>
             </div>
             <div>
                 <button onClick={addMyPostMessage}>

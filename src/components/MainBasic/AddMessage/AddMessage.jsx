@@ -1,17 +1,15 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
-import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from "../../../redux/mainPostsPage-reducer";
 
-function AddMessage(prop) {
-    const newMessageRef = React.createRef();
+function AddMessage(props) {
 
     const addNewMessage = () => {
-        prop.dispatch( addNewMessageActionCreator(prop.person) );
+        props.addNewMessageActionCreator(props.person);
     }
 
-    const updateNewMessageTextArea = () => {
-        let newMessageRefTextArea = newMessageRef.current.value;
-        prop.dispatch( updateNewMessageTextAreaActionCreator(newMessageRefTextArea) );
+    const updateNewMessageTextArea = (e) => {
+        let newMessageRefTextArea = e.target.value;
+        props.updateNewMessageTextAreaActionCreator(newMessageRefTextArea);
     }
 
     return (
@@ -19,11 +17,10 @@ function AddMessage(prop) {
             <div>
                 <textarea className={AddMessageStyle.text} onChange={updateNewMessageTextArea}
                           name="textMessage"
-                          ref={newMessageRef}
                           cols="50"
                           rows="2"
                           placeholder={'Написать сообщение'}
-                          value={prop.textNewMessage}/>
+                          value={props.textNewMessage}/>
             </div>
             <div>
                 <button onClick={addNewMessage}>

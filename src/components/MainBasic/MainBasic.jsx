@@ -1,24 +1,24 @@
 import MessageModule from './MainBasic.module.css'
-import Message from "./Message/Message";
-import Persona from "./Persona/Persona";
 import {Route} from "react-router-dom";
-import AddMessage from "./AddMessage/AddMessage";
+import AddMessageContainer from "./AddMessage/AddMessageContainer";
+import MessageContainer from "./Message/MessageContainer";
+import PersonaContainer from "./Persona/PersonaContainer";
 
 function MainBasic(props) {
 
     const persons = [
-        props.personsData.map( person => <Persona name={person.name} id={person.id} img={person.img}/>)
+        props.personsData.map( person => <PersonaContainer name={person.name} id={person.id} img={person.img}/>)
     ]
     const messages = [
         props.personsData.map( person => {
-            return <Route path = {'/message/' + person.name} component = { () => <Message persona={props.messagesData[person.name]}/>}/>
+            return <Route path = {'/message/' + person.name} component = { () => <MessageContainer persona={person.name}/>}/>
+            //<Message persona={props.messagesData[person.name]}/>
         })
     ]
+
     const newMessage = [
         props.personsData.map( person => {
-            return <Route path = {'/message/' + person.name} component = { () => <AddMessage dispatch={props.dispatch}
-                                                                                             textNewMessage={props.textNewMessage}
-                                                                                             person={person.name}/>}/>
+            return <Route path = {'/message/' + person.name} component = { () => <AddMessageContainer person={person.name}/>}/>
         })
     ]
 

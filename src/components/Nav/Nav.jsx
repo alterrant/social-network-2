@@ -1,17 +1,17 @@
 import NavStyle from './Nav.module.css'
-import Link from "./Links/Link";
-import Friends from "./Friends/Friends";
+import LinkContainer from "./Links/LinkContainer";
+import FriendsContainer from "./Friends/FriendsContainer";
 
 function Nav(prop) {
     const navLinks = [
-       prop.sitebar.links.map( linkName => <Link name={linkName}/>)
+       prop.links.map( linkName => <LinkContainer name={linkName}/>)
     ]
     return (
         <div className = {NavStyle.nav}>
             <ul className = {NavStyle.ul}>
                 { navLinks }
             </ul>
-            <Friends friends={prop.sitebar.friends}/>
+            <FriendsContainer friends={prop.friends}/>
         </div>
     );
 }

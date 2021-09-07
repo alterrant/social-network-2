@@ -1,10 +1,9 @@
-import Friend from "./Friend/Friend";
 import FriendsStyle from './Friends.module.css'
+import FriendContainer from "./Friend/FriendContainer";
 
 function Friends(prop) {
-
     const friendItem = [
-        prop.friends.map( friendItem => <Friend name={friendItem.name} img={friendItem.img}/>)
+        prop.friends.map( friendItem => <FriendContainer name={friendItem.name} img={friendItem.img}/>)
     ]
 
     return (

@@ -1,9 +1,9 @@
-import MessageBy from "./MessageBy/MessageBy";
+import MessageByContainer from "./MessageBy/MessageByContainer";
 
-function Message(prop) {
+function Message(props) {
 
     const dialog = [
-        prop.persona.map( message => <MessageBy messageBy={message.message} name={message.name}/>)
+        props.personsMessage.map( message => <MessageByContainer messageBy={message.message} name={message.name}/>)
     ]
 
     return (

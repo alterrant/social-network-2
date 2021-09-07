@@ -4,14 +4,13 @@ import React from 'react';
 function AddMessage(props) {
 
     const addNewMessage = () => {
-        props.addNewMessageActionCreator(props.person);
+        props.addNewMessage(props.person);
     }
 
     const updateNewMessageTextArea = (e) => {
         let newMessageRefTextArea = e.target.value;
-        props.updateNewMessageTextAreaActionCreator(newMessageRefTextArea);
+        props.updateNewMessageTextArea(newMessageRefTextArea);
     }
-
     return (
         <div className={AddMessageStyle.textArea}>
             <div>

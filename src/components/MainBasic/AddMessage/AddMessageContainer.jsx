@@ -3,16 +3,16 @@ import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from 
 import {connect} from "react-redux";
 import AddMessage from "./AddMessage";
 
-const mapStateToProps = (state, person) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         textNewMessage: state.mainPostsPage.textNewMessage,
-        person: person
+        person: ownProps.person
     }
 }
-const mapDispatchToProps = (dispatch, person) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addNewMessage: () => {
-            dispatch( addNewMessageActionCreator(person) );
+            dispatch( addNewMessageActionCreator(ownProps.person) );
         },
         updateNewMessageTextArea: (newMessageRefTextArea) => {
             dispatch( updateNewMessageTextAreaActionCreator(newMessageRefTextArea) );

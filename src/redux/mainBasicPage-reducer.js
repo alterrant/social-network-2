@@ -18,19 +18,33 @@ let initialState = {
   }
 }
 
-const mainBasicReducer = (state = initialState, action) => {
 
+const mainBasicReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD-MY-POST-MESSAGE':
       let myPostNewMessage = {
         id: '3', message: state.myPosts.textMynewMessage, likes: '0'
       }
-      state.myPosts.messages.push(myPostNewMessage);
-      state.myPosts.textMynewMessage = '';
-      return state;
-    case 'UPDATE-MY-POST-MESSAGE-TEXT-AREA':
-      state.myPosts.textMynewMessage = action.updateMyPostNewTextMessage;
-      return state;
+      return {
+        ...state,
+        myPosts: {
+          ...state.myPosts,
+          messages: [
+              ...state.myPosts.messages,
+              myPostNewMessage
+          ],
+          textMynewMessage: ''
+        }
+      }
+    case 'UPDATE-MY-POST-MESSAGE-TEXT-AREA': {
+      return {
+        ...state,
+        myPosts: {
+          ...state.myPosts,
+          textMynewMessage: action.updateMyPostNewTextMessage
+        }
+      }
+    }
     default:
       return state;
   }

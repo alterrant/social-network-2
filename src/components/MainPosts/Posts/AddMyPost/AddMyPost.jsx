@@ -11,7 +11,7 @@ function AddMyPost(props) {
         let newMessageRefTextArea = e.target.value;
         props.updateNewMessageTextArea(newMessageRefTextArea);
     }
-
+    /*console.log(props.myPosts)*/
     return (
         <div className={AddMessageStyle.textArea}>
             <div>

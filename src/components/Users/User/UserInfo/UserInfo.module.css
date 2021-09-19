@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  margin: 1%;
+}
+.wrapper_user_info {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+.wrapper_user_location {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70%;
+}

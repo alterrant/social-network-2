@@ -9,7 +9,7 @@ function AddMessage(props) {
 
     const updateNewMessageTextArea = (e) => {
         let newMessageRefTextArea = e.target.value;
-        props.updateNewMessageTextArea(newMessageRefTextArea);
+        props.updateNewPostMessageTextArea(newMessageRefTextArea);
     }
     return (
         <div className={AddMessageStyle.textArea}>

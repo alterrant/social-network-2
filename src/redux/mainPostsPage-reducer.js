@@ -3,7 +3,11 @@ const UPDATE_NEW_TEXT_MESSAGE = 'UPDATE-NEW-TEXT-MESSAGE';
 
 let initialState = {
   personsData: [
-    {id: '1', name: 'persona1', img: 'https://yt3.ggpht.com/ytc/AAUvwniM0SeQQ5jFJMBSs_j01PNZOaWfFhYYM6wxNidW=s900-c-k-c0x00ffffff-no-rj'},
+    {
+      id: '1',
+      name: 'persona1',
+      img: 'https://yt3.ggpht.com/ytc/AAUvwniM0SeQQ5jFJMBSs_j01PNZOaWfFhYYM6wxNidW=s900-c-k-c0x00ffffff-no-rj'
+    },
     {id: '2', name: 'persona2', img: 'https://sun9-70.userapi.com/c856120/v856120656/1940bd/bKV0GPv_pzw.jpg'},
     {id: '3', name: 'persona3', img: 'https://www.meme-arsenal.com/memes/036d20221d40a1c5582564755bd0effb.jpg'}
   ],
@@ -30,24 +34,55 @@ let initialState = {
   },
   textNewMessage: ''
 }
-
 const mainPostsReducer = (state = initialState, action) => {
-
   switch (action.type) {
     case 'ADD-MESSAGE':
       let newMessage = {
         id: '6', name: 'me', message: state.textNewMessage
       }
-      state.messagesData[action.newMessage].push(newMessage);
-      state.textNewMessage = '';
-      return state;
+      return {
+        ...state,
+        messagesData: {
+          ...state.messagesData,
+          [action.newMessage]: [
+            ...state.messagesData[action.newMessage],
+            newMessage
+          ]
+        },
+        textNewMessage: ''
+      }
     case 'UPDATE-NEW-TEXT-MESSAGE':
-      state.textNewMessage = action.updateNewTextMessage;
-      return state;
+      return {
+        ...state,
+        textNewMessage: action.updateNewTextMessage
+      }
     default:
       return state;
   }
 }
+
+/*
+* const mainBasicReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD-MY-POST-MESSAGE': {
+      let stateCopy = JSON.parse(JSON.stringify(state));
+      let myPostNewMessage = {
+        id: '3', message: stateCopy.myPosts.textMynewMessage, likes: '0'
+      }
+      stateCopy.myPosts.messages.push(myPostNewMessage);
+      stateCopy.myPosts.textMynewMessage = '';
+      return stateCopy;
+    }
+    case 'UPDATE-MY-POST-MESSAGE-TEXT-AREA': {
+      let stateCopy = JSON.parse(JSON.stringify(state));
+      stateCopy.myPosts.textMynewMessage = action.updateMyPostNewTextMessage;
+      return stateCopy;
+    }
+    default:
+      return state;
+  }
+}
+* */
 
 export default mainPostsReducer;
 

@@ -1,5 +1,5 @@
 let initialState = {
-  links: ['profile', 'message', 'news', 'music', 'settings'],
+  links: ['profile', 'message', 'users', 'music', 'settings'],
   friends: [
     {
       id: 1,

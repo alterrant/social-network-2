@@ -1,0 +1,15 @@
+.ava {
+  width: 100px;
+  height: 100px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0 5px;
+}
+
+.status_wrapper {
+  display: flex;
+  flex-direction: column;
+}

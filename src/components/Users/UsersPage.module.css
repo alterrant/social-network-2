@@ -5,3 +5,11 @@
   flex-direction: column;
   margin: -5px auto -5px;
 }
+
+.currentPage {
+  font-weight: bold;
+}
+
+.wrapperStyle {
+  height: 100vh;
+}

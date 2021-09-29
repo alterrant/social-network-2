@@ -1,27 +1,31 @@
 import React from 'react';
-import UserContainer from "./User/UserContainer";
 import UsersStyle from './UsersPage.module.css';
-import * as axios from "axios";
+import UserContainer from "./User/UserContainer";
 
-class UsersPage extends React.Component {
-  constructor(props) {
-    super(props);
+const UsersPage = (props) => {
 
-    if (this.props.users.length === 0)
-      axios.get('https://social-network.samuraijs.com/api/1.0/users')
-          .then(function (response) {
-            debugger
-            props.setUsers(response.data.items);
-          })
+  let usersArr = props.users.map(user => <UserContainer user={user}/>);
+  let maxPages = Math.ceil(props.totalCount / props.pageSize);
+  let numberPages = [];
+  if (maxPages > 20) maxPages = 10;
+  for (let i = 1; i <= maxPages; i++) {
+    numberPages.push(<span className={props.currentPage === i && UsersStyle.currentPage} onClick={() => {
+      props.setCurrentPage(i)
+    }}>{i}</span>)
   }
 
-  render() {
-    let usersArr = this.props.users.map(user => <UserContainer user={user}/>)
-
-    return <div className={UsersStyle.wrapper}>
-      {usersArr}
-    </div>
-  }
+  return (
+      <>
+        <div className={UsersStyle.wrapperStyle}>
+          <div>
+            {numberPages}
+          </div>
+          <div className={UsersStyle.wrapper}>
+            {usersArr}
+          </div>
+        </div>
+      </>
+  )
 }
 
 export default UsersPage;

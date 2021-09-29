@@ -3,7 +3,6 @@ import AddMyPostContainer from "./AddMyPost/AddMyPostContainer";
 import PostContainer from "./Post/PostContainer";
 
 function Posts(props) {
-    debugger
     let myPost = [
         props.myPosts.messages.map( postData => <PostContainer message={postData.message}/>)
     ]

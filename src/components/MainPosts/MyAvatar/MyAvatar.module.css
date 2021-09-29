@@ -2,8 +2,8 @@
     padding: 2% 1% 0 1%;
     margin-bottom: 4%;
     display: flex;
-    align-items: center;
     column-gap: 1%;
+    align-items: normal;
 }
 
 .wrapper img {

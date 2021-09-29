@@ -1,6 +1,8 @@
 import User from "./User";
 import {connect} from "react-redux";
 
+
+
 const mapStateToProps = (state, ownProps) => {
   return {
     // закоментировано, чтобы не рушилась логика с API

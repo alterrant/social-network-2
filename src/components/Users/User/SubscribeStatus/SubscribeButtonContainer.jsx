@@ -1,17 +1,38 @@
 import SubscribeButton from "./SubscribeButton";
 import {connect} from "react-redux";
-import {userSubscriberAC} from "../../../../redux/users-reducer";
+import * as React from "react";
+import {userSubscriber} from "../../../../redux/users-reducer";
+import {usersAPI} from "../../../../api/api";
+
+class subscribe extends React.Component {
+  follow = () => {
+    usersAPI.follow(this.props.userId);
+    this.props.userSubscriber(this.props.userId)
+  }
+
+  unfollow = () => {
+    usersAPI.unfollow(this.props.userId);
+    this.props.userSubscriber(this.props.userId);
+  }
+
+  render() {
+    if (this.props.subscribeStatus) {
+      return (
+          <SubscribeButton subscribe={this.unfollow}
+                           {...this.props}/>
+      )
+    }
+    return <SubscribeButton subscribe={this.follow}
+                            userId={this.props.userId}
+                            subscribeStatus={this.props.subscribeStatus}/>
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    subscribeStatus: ownProps.subscribeStatus.userStatus,
+    subscribeStatus: ownProps.subscribeStatus.followed,
     userId: ownProps.subscribeStatus.id
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeSubscribe: (userId) => dispatch(userSubscriberAC(userId))
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribeButton)
+export default connect(mapStateToProps, {userSubscriber})(subscribe)

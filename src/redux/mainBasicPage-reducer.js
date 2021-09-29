@@ -1,11 +1,49 @@
 const ADD_MY_POST_MESSAGE = 'ADD-MY-POST-MESSAGE';
 const UPDATE_MY_POST_MESSAGE_TEXT_AREA = 'UPDATE-MY-POST-MESSAGE-TEXT-AREA'
+const GET_USER_PROFILE = 'GET_USER_PROFILE';
 
 let initialState = {
   myDescription: {
     img: 'https://yt3.ggpht.com/ytc/AAUvwnj_ISXCawqTq2rUIJvEASLiYXmoNCNbxKAp8AIDMz0=s900-c-k-c0x00ffffff-no-rj',
     description: 'I\'m Andrey the creator of this site. It\'s my first social network. This page is hosted ' +
         'on Git https://github.com/alterrant/social-network-2.git\nThank you for watching this and don\'t be mad on me.'
+  },
+  /*
+  {
+  "aboutMe": null,
+  "contacts": {
+    "facebook": null,
+    "website": null,
+    "vk": null,
+    "twitter": null,
+    "instagram": null,
+    "youtube": null,
+    "github": null,
+    "mainLink": null
+  },
+  "lookingForAJob": false,
+  "lookingForAJobDescription": null,
+  "fullName": "IgorFrezer",
+  "userId": 19787,
+  "photos": {
+    "small": null,
+    "large": null
+  }
+}
+   */
+  // userIdProfile: null,
+  userIdProfile: {
+    fullName: '1',
+    aboutMe: '2',
+    contacts: {facebook: null,
+      website: null,
+      vk: null,
+      twitter: null,
+      instagram: null,
+      youtube: null,
+      github: null,
+      mainLink: null},
+    photos: {large:'4'}
   },
   myPosts: {
     img: 'https://yt3.ggpht.com/ytc/AAUvwnj_ISXCawqTq2rUIJvEASLiYXmoNCNbxKAp8AIDMz0=s900-c-k-c0x00ffffff-no-rj',
@@ -45,6 +83,9 @@ const mainBasicReducer = (state = initialState, action) => {
         }
       }
     }
+    case GET_USER_PROFILE:
+      debugger
+      return {...state, userIdProfile: action.userIdProfile}
     default:
       return state;
   }
@@ -56,3 +97,4 @@ export const addMyPostMessageActionCreator = () => ({type: ADD_MY_POST_MESSAGE})
 export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) => {
   return {type: UPDATE_MY_POST_MESSAGE_TEXT_AREA, updateMyPostNewTextMessage: newMessageRefTextArea}
 }
+export const getUserProfile = (userIdProfile) => ({type: GET_USER_PROFILE, userIdProfile})

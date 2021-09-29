@@ -1,11 +1,13 @@
+
+
 function SubscribeButton(props) {
   const changeSub = () => {
-    props.changeSubscribe(props.userId)
+    props.subscribe(props.userId)
   }
 
   return (
       <button onClick={ changeSub }>{
-        (props.subscribeStatus)? 'Follow' : 'Unfollow'
+        (props.subscribeStatus)? 'Followed' : 'Unfollowed'
       }
       </button>
   )

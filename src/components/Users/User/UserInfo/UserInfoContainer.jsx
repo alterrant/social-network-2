@@ -3,7 +3,7 @@ import UserInfo from "./UserInfo";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userName: ownProps.name
+    userName: ownProps.userDescription.name
     // закоментировано, чтобы не рушилась логика с API
     //userName: ownProps.userDescription.userInformation.name,
     // userPrescription: ownProps.userDescription.userInformation.prescription,

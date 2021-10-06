@@ -19,9 +19,9 @@ export const usersAPI = {
     return instance.get('auth/me')
   },
   getProfile(userId) {
-    return instance.get(`profile/${userId}`)
+    return instance.get(`profile/${userId}`).then( received => received.data )
   },
   getUsers(pageSize, currentPage) {
-    return instance.get(`users?count=${pageSize}&page=${currentPage}`)
+    return instance.get(`users?count=${pageSize}&page=${currentPage}`).then( received => received.data )
   }
 }

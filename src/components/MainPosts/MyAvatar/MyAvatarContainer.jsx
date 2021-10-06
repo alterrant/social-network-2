@@ -4,7 +4,8 @@ import MyAvatar from "./MyAvatar";
 const mapStateToProps = (store) => {
   return {
     img: store.mainBasicPage.myDescription.img,
-    description: store.mainBasicPage.myDescription.description
+    description: store.mainBasicPage.myDescription.description,
+    myStatus: store.mainBasicPage.myDescription.myStatus
   }
 }
 

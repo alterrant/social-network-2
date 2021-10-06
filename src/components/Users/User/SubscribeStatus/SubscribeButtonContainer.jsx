@@ -1,18 +1,14 @@
 import SubscribeButton from "./SubscribeButton";
 import {connect} from "react-redux";
 import * as React from "react";
-import {userSubscriber} from "../../../../redux/users-reducer";
-import {usersAPI} from "../../../../api/api";
+import {following, unfollowing} from "../../../../redux/users-reducer";
 
 class subscribe extends React.Component {
   follow = () => {
-    usersAPI.follow(this.props.userId);
-    this.props.userSubscriber(this.props.userId)
+    this.props.following(this.props.userId);
   }
-
   unfollow = () => {
-    usersAPI.unfollow(this.props.userId);
-    this.props.userSubscriber(this.props.userId);
+    this.props.unfollowing(this.props.userId);
   }
 
   render() {
@@ -24,15 +20,17 @@ class subscribe extends React.Component {
     }
     return <SubscribeButton subscribe={this.follow}
                             userId={this.props.userId}
-                            subscribeStatus={this.props.subscribeStatus}/>
+                            subscribeStatus={this.props.subscribeStatus}
+                            followingUsers={this.props.followingUsers}/>
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     subscribeStatus: ownProps.subscribeStatus.followed,
-    userId: ownProps.subscribeStatus.id
+    userId: ownProps.subscribeStatus.id,
+    followingUsers: state.usersPage.followingUsers
   }
 }
 
-export default connect(mapStateToProps, {userSubscriber})(subscribe)
+export default connect(mapStateToProps, {following, unfollowing})(subscribe)

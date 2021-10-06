@@ -6,7 +6,7 @@ function SubscribeButton(props) {
   }
 
   return (
-      <button onClick={ changeSub }>{
+      <button disabled={props.followingUsers.some( id => id === props.userId)} onClick={ changeSub }>{
         (props.subscribeStatus)? 'Followed' : 'Unfollowed'
       }
       </button>

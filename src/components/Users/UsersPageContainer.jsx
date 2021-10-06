@@ -1,44 +1,31 @@
 import {connect} from "react-redux";
 import UsersPage from "./UsersPage";
-import {changeCurrentPage, getUsers, preload, setUsers} from "../../redux/users-reducer";
+import {changeCurrentPage, loadUsers} from "../../redux/users-reducer";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 class UsersPageContainerAPI extends React.Component {
 
   componentDidMount() {
-    this.props.preload(true)
-    usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
-        .then((response) => {
-          this.props.setUsers(response.data.items);
-          this.props.getUsers(response.data.totalCount);
-          this.props.preload(false)
-        })
+    this.props.loadUsers(this.props.pageSize, this.props.currentPage)
   }
 
   setCurrentPage = (pageNumber) => {
     this.props.changeCurrentPage(pageNumber);
-    this.props.preload(true)
-    usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
-        .then((response) => {
-          this.props.setUsers(response.data.items);
-          this.props.getUsers(response.data.totalCount);
-          this.props.preload(false)
-        })
+    this.props.loadUsers(this.props.pageSize, pageNumber)
   }
 
   render() {
-      return (
-          <>
-            { (this.props.preloadStatus)? <Preloader/> : null }
-            <UsersPage users={this.props.users}
-                       totalCount={this.props.totalCount}
-                       pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage}
-                       setCurrentPage={this.setCurrentPage}/>
-          </>
-      )
+    return (
+        <>
+          {(this.props.preloadStatus) ? <Preloader/> : null}
+          <UsersPage users={this.props.users}
+                     totalCount={this.props.totalCount}
+                     pageSize={this.props.pageSize}
+                     currentPage={this.props.currentPage}
+                     setCurrentPage={this.setCurrentPage}/>
+        </>
+    )
   }
 }
 
@@ -66,8 +53,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPageContainerAPI);*/
 
 export default connect(mapStateToProps, {
-  setUsers,
-  getUsers,
   changeCurrentPage,
-  preload
+  loadUsers
 })(UsersPageContainerAPI);

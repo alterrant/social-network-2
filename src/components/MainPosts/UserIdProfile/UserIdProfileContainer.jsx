@@ -1,30 +1,13 @@
 import * as React from "react";
 import UserIdProfile from "./UserIdProfile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../../redux/mainBasicPage-reducer";
+import {loadUserProfile} from "../../../redux/mainBasicPage-reducer";
 import Preloader from "../../common/Preloader/Preloader";
-import {preload} from "../../../redux/users-reducer";
-import {usersAPI} from "../../../api/api";
 
 class UserIdProfileContainer extends React.Component {
 
   componentDidMount() {
-    this.props.preload(true)
-    /*
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.userId}`)
-        .then(response => {
-              this.props.getUserProfile(response.data);
-              this.props.preload(false)
-            }
-        )
-     */
-
-    usersAPI.getProfile(this.props.userId)
-        .then(response => {
-              this.props.getUserProfile(response.data);
-              this.props.preload(false)
-            }
-        )
+    this.props.loadUserProfile(this.props.userId)
   }
 
   render() {
@@ -50,4 +33,4 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps, {getUserProfile, preload})(UserIdProfileContainer);
+export default connect(mapStateToProps, {loadUserProfile})(UserIdProfileContainer);

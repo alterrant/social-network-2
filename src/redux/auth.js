@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const AUTHORISE = 'AUTHORISE';
 const SET_AUTH = 'SET_AUTH';
 const GET_AUTH_USER_PROFILE = 'GET_AUTH_USER_PROFILE';
@@ -37,7 +39,6 @@ const auth = (state = initialState, action) => {
       ...action.data}}
     case GET_AUTH_USER_PROFILE:
       return {...state, authUserIdProfile: action.authUserIdProfile}
-      //return {...state}
     default:
       return state
   }
@@ -48,3 +49,21 @@ export default auth;
 export const authorise = (authoriseStatus) => ({type: AUTHORISE, authoriseStatus})
 export const setAuth = (email, userId, login) => ({type: SET_AUTH, data:{email, userId, login}})
 export const getAuthUserProfile = (authUserIdProfile) => ({type: GET_AUTH_USER_PROFILE, authUserIdProfile})
+export const setAuthUserAndProfile = (authoriseStatus) => (dispatch) => {
+    usersAPI.auth()
+    .then((received) => {
+          if (received.data.resultCode === 0) {
+            dispatch(authorise(true));
+            let {email, id, login} = received.data.data;
+            dispatch(setAuth(email, id, login));
+            return received
+          }
+          return received
+        }
+    )
+    .then((received) => {
+      if (authoriseStatus) usersAPI.getProfile(received.data.data.id).then((authProfile) => {
+        dispatch(getAuthUserProfile(authProfile));
+      })
+    })
+}

@@ -1,8 +1,11 @@
+import {usersAPI} from "../api/api";
+
 const SET_USERS = 'SET_USERS';
 const SET_TOGGLE = 'SET_TOGGLE';
 const GET_USERS = 'GET_USERS';
 const CHANGE_CURRENT_PAGE = 'CHANGE_USERS_PAGE';
 const PRELOAD = 'PRELOAD';
+const LOADING_USERS = 'LOADING_USERS'
 
 let initialState = {
   users: [
@@ -18,51 +21,13 @@ let initialState = {
           name: 'Viktor',
           prescription: 'bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba bulba'
         }
-      },
-      {
-        id: 2,
-        userStatus: true,
-        location: {
-          country: 'USA',
-          city: 'New-York'
-        },
-        userInformation: {
-          img: 'https://avatars.mds.yandex.net/get-zen_doc/1586459/pub_5dbe960978125e00b080ef3c_5dbe966a8f011100ad33c13a/scale_1200',
-          name: 'James',
-          prescription: 'money'
-        }
-      },
-      {
-        id: 3,
-        userStatus: false,
-        location: {
-          country: 'USSR',
-          city: 'Moscow'
-        },
-        userInformation: {
-          img: 'https://avatars.mds.yandex.net/get-zen_doc/1586459/pub_5dbe960978125e00b080ef3c_5dbe966a8f011100ad33c13a/scale_1200',
-          name: 'Ivan',
-          prescription: 'medved'
-        }
-      },
-      {
-        id: 4,
-        userStatus: false,
-        location: {
-          country: 'China',
-          city: 'Hong Kong'
-        },
-        userInformation: {
-          img: 'https://avatars.mds.yandex.net/get-zen_doc/1586459/pub_5dbe960978125e00b080ef3c_5dbe966a8f011100ad33c13a/scale_1200',
-          name: 'Jackie',
-          prescription: '-chan'
-        }
       }*/
   ],
   totalCount: 0,
   currentPage: 1,
   pageSize: 4,
   isFetch: false,
+  followingUsers: [],
   buttonShowMoreUsers: {
     textButton: 'Show more'
   },
@@ -85,9 +50,16 @@ const usersReducer = (state = initialState, action) => {
     case GET_USERS:
       return {...state, totalCount: action.totalUsers}
     case CHANGE_CURRENT_PAGE:
+      debugger
       return {...state, currentPage: action.currentPage}
     case PRELOAD:
       return {...state, isFetch: action.preloadStatus}
+    case LOADING_USERS:
+      return {
+        ...state, followingUsers: action.isLoadingRequest
+            ? [...state.followingUsers, action.loadingUserId]
+            : state.followingUsers.filter((id) => id !== action.loadingUserId)
+      }
     case 'SHOW-MORE-USERS':
       return {...state};
 
@@ -103,3 +75,37 @@ export const userSubscriber = (userId) => ({type: SET_TOGGLE, userId})
 export const getUsers = (totalUsers) => ({type: GET_USERS, totalUsers})
 export const changeCurrentPage = (currentPage) => ({type: CHANGE_CURRENT_PAGE, currentPage})
 export const preload = (preloadStatus) => ({type: PRELOAD, preloadStatus})
+export const loadingUsers = (isLoadingRequest, loadingUserId) => (
+    {type: LOADING_USERS, isLoadingRequest, loadingUserId}
+)
+export const following = (userId) => (dispatch) => {
+
+  dispatch(loadingUsers(true, userId));
+
+  usersAPI.follow(userId)
+      .then(() => {
+        dispatch(userSubscriber(userId));
+        dispatch(loadingUsers(false, userId));
+      })
+}
+export const unfollowing = (userId) => (dispatch) => {
+
+  dispatch(loadingUsers(true, userId));
+
+  usersAPI.unfollow(userId)
+      .then(() => {
+        dispatch(userSubscriber(userId));
+        dispatch(loadingUsers(false, userId));
+      })
+}
+export const loadUsers = (pageSize, currentPage) => (dispatch) => {
+
+  dispatch(preload(true));
+
+  usersAPI.getUsers(pageSize, currentPage)
+      .then((response) => {
+        dispatch(setUsers(response.items));
+        dispatch(getUsers(response.totalCount));
+        dispatch(preload(false));
+      })
+}

@@ -6,6 +6,7 @@ import MainBasicContainer from "./components/MainBasic/MainBasicContainer";
 import NavContainer from "./components/Nav/NavContainer";
 import UsersPageContainer from "./components/Users/UsersPageContainer";
 import MainContainer from "./components/MainPosts/MainContainer";
+import Login from "./components/Login/Login";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path = '/users' component = { () => <UsersPageContainer/> }/>
                 <Route path = '/music' component = {MainBasicContainer}/>
                 <Route path = '/settings' component = {MainBasicContainer}/>
+              <Route path = '/login' component = { () => <Login/> }/>
             </div>
         </div>
     );

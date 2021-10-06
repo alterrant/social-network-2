@@ -5,7 +5,6 @@ import {Route, Switch} from "react-router-dom";
 import UserIdProfileContainer from "./UserIdProfile/UserIdProfileContainer";
 
 function Main(props) {
-  debugger
   return (
       <div className={MainStyle.main}>
         <img

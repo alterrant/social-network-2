@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {preload} from "./users-reducer";
+
 const ADD_MY_POST_MESSAGE = 'ADD-MY-POST-MESSAGE';
 const UPDATE_MY_POST_MESSAGE_TEXT_AREA = 'UPDATE-MY-POST-MESSAGE-TEXT-AREA'
 const GET_USER_PROFILE = 'GET_USER_PROFILE';
@@ -6,7 +9,8 @@ let initialState = {
   myDescription: {
     img: 'https://yt3.ggpht.com/ytc/AAUvwnj_ISXCawqTq2rUIJvEASLiYXmoNCNbxKAp8AIDMz0=s900-c-k-c0x00ffffff-no-rj',
     description: 'I\'m Andrey the creator of this site. It\'s my first social network. This page is hosted ' +
-        'on Git https://github.com/alterrant/social-network-2.git\nThank you for watching this and don\'t be mad on me.'
+        'on Git https://github.com/alterrant/social-network-2.git\nThank you for watching this and don\'t be mad on me.',
+    myStatus: 'Learning React'
   },
   /*
   {
@@ -84,7 +88,6 @@ const mainBasicReducer = (state = initialState, action) => {
       }
     }
     case GET_USER_PROFILE:
-      debugger
       return {...state, userIdProfile: action.userIdProfile}
     default:
       return state;
@@ -98,3 +101,15 @@ export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) 
   return {type: UPDATE_MY_POST_MESSAGE_TEXT_AREA, updateMyPostNewTextMessage: newMessageRefTextArea}
 }
 export const getUserProfile = (userIdProfile) => ({type: GET_USER_PROFILE, userIdProfile})
+export const loadUserProfile = (userId) => (dispatch) => {
+
+  preload(true)
+
+  usersAPI.getProfile(userId)
+      .then(received => {
+            dispatch(getUserProfile(received));
+            preload(false)
+          }
+      )
+}
+

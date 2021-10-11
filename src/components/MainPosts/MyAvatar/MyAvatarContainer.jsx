@@ -1,5 +1,20 @@
 import {connect} from "react-redux";
 import MyAvatar from "./MyAvatar";
+import {loadMyStatus, putMyStatus, setMyStatus} from "../../../redux/mainBasicPage-reducer";
+import * as React from "react";
+
+class MyAvatarContainer extends React.Component {
+
+  componentDidMount() {
+    this.props.loadMyStatus()
+  }
+
+  render() {
+    return (
+      <MyAvatar {...this.props}/>
+    )
+  }
+}
 
 const mapStateToProps = (store) => {
   return {
@@ -9,6 +24,5 @@ const mapStateToProps = (store) => {
   }
 }
 
-const MyAvatarContainer = connect(mapStateToProps)(MyAvatar);
+export default connect(mapStateToProps, {loadMyStatus, setMyStatus, putMyStatus})(MyAvatarContainer);
 
-export default MyAvatarContainer;

@@ -4,14 +4,25 @@ import * as React from "react";
 export default class MyAvatar extends React.Component {
 
   state = {
-    switchStatus: true
+    switchStatus: false,
+    myStatus: this.props.myStatus
   }
 
   toggle() {
     this.setState({
       switchStatus: !this.state.switchStatus
     })
+    if (!this.state.switchStatus) {
+      //Ниже вместо set должен быть put
+      this.props.putMyStatus(this.state.myStatus)
+    }
   }
+
+  changeStatus = (e) => {
+    this.setState({
+      myStatus: e.currentTarget.value
+    })
+}
 
   render() {
     return (
@@ -23,11 +34,11 @@ export default class MyAvatar extends React.Component {
               {(!this.state.switchStatus)
                   ?
                   <div>
-                    <span onDoubleClick={() => this.toggle(this)}>{this.props.myStatus}</span>
+                    <span onDoubleClick={() => this.toggle(this)}>{this.props.myStatus || 'Haven\'t status'}</span>
                   </div>
                   :
                   <div>
-                    <input autoFocus={true} value={'Describe your status'} onBlur={() => this.toggle(this)}></input>
+                    <input autoFocus={true} onChange={this.changeStatus} onBlur={() => this.toggle(this)} value={this.state.myStatus}/>
                   </div>
               }
             </div>

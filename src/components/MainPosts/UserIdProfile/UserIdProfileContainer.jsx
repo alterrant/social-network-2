@@ -17,7 +17,8 @@ class UserIdProfileContainer extends React.Component {
           <UserIdProfile fullName={this.props.fullName}
                          aboutMe={this.props.aboutMe}
                          contacts={this.props.contacts.github}
-                         photos={this.props.photos}/>
+                         photos={this.props.photos}
+                         userStatus={this.props.userStatus}/>
         </>
     )
   }
@@ -29,6 +30,7 @@ const mapStateToProps = (store) => {
     aboutMe: store.mainBasicPage.userIdProfile.aboutMe,
     contacts: store.mainBasicPage.userIdProfile.contacts,
     photos: store.mainBasicPage.userIdProfile.photos.large,
+    userStatus: store.mainBasicPage.userIdProfileStatus,
     preloadStatus: store.usersPage.isFetch
   }
 }

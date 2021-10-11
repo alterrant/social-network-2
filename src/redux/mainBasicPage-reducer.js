@@ -1,9 +1,11 @@
-import {usersAPI} from "../api/api";
+import {authAPI, profileAPI, usersAPI} from "../api/api";
 import {preload} from "./users-reducer";
 
 const ADD_MY_POST_MESSAGE = 'ADD-MY-POST-MESSAGE';
 const UPDATE_MY_POST_MESSAGE_TEXT_AREA = 'UPDATE-MY-POST-MESSAGE-TEXT-AREA'
 const GET_USER_PROFILE = 'GET_USER_PROFILE';
+const GET_USER_PROFILE_STATUS = 'GET_USER_PROFILE_STATUS';
+const SET_MY_STATUS = 'SET_MY_STATUS';
 
 let initialState = {
   myDescription: {
@@ -47,8 +49,10 @@ let initialState = {
       youtube: null,
       github: null,
       mainLink: null},
-    photos: {large:'4'}
+    photos: {large:'4'},
+    userStatus: ''
   },
+  userIdProfileStatus: '',
   myPosts: {
     img: 'https://yt3.ggpht.com/ytc/AAUvwnj_ISXCawqTq2rUIJvEASLiYXmoNCNbxKAp8AIDMz0=s900-c-k-c0x00ffffff-no-rj',
     messages: [
@@ -87,8 +91,12 @@ const mainBasicReducer = (state = initialState, action) => {
         }
       }
     }
+    case SET_MY_STATUS:
+      return {...state, myDescription: {...state.myDescription, myStatus: action.status}}
     case GET_USER_PROFILE:
       return {...state, userIdProfile: action.userIdProfile}
+    case GET_USER_PROFILE_STATUS:
+      return {...state, userIdProfileStatus: action.userId}
     default:
       return state;
   }
@@ -100,16 +108,46 @@ export const addMyPostMessageActionCreator = () => ({type: ADD_MY_POST_MESSAGE})
 export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) => {
   return {type: UPDATE_MY_POST_MESSAGE_TEXT_AREA, updateMyPostNewTextMessage: newMessageRefTextArea}
 }
-export const getUserProfile = (userIdProfile) => ({type: GET_USER_PROFILE, userIdProfile})
-export const loadUserProfile = (userId) => (dispatch) => {
+export const setMyStatus = (status) => ({type: SET_MY_STATUS, status})
 
+export const loadMyStatus = () => (dispatch) => {
+
+  authAPI.auth()
+      .then(receiveMyId => {
+        return receiveMyId.data.data.id})
+      .then(myId => {
+        profileAPI.getProfileStatus(myId)
+            .then(receivedMyStatus => {
+              dispatch(setMyStatus(receivedMyStatus.data));
+            })
+      })
+}
+
+export const putMyStatus = (status) => (dispatch) => {
+  profileAPI.setProfileStatus(status)
+      .then(recevedStatus => {
+        if (recevedStatus.data.resultCode === 0) dispatch(setMyStatus(status))
+          }
+      )
+}
+
+
+export const getUserProfile = (userIdProfile) => ({type: GET_USER_PROFILE, userIdProfile})
+export const getUserProfileStatus = (userId) => ({type: GET_USER_PROFILE_STATUS, userId})
+export const loadUserProfile = (userId) => (dispatch) => {
   preload(true)
 
   usersAPI.getProfile(userId)
       .then(received => {
             dispatch(getUserProfile(received));
-            preload(false)
           }
       )
+  //сделал не через then, чтобы успевало прогрузиться
+  profileAPI.getProfileStatus(userId)
+      .then(receivedStatus => {
+        dispatch(getUserProfileStatus(receivedStatus.data))
+        preload(false)
+      }
+  )
 }
 

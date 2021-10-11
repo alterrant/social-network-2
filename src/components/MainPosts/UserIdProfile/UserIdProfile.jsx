@@ -13,6 +13,7 @@ const UserIdProfile = (props) => {
         <div className={UserInfoStyle.wrapper}>
           <div>{props.fullName}</div>
           <div>{(props.aboutMe) ? props.aboutMe : 'No information about user'}</div>
+          <div>{(props.userStatus) ? props.userStatus : 'No information about user status'}</div>
           <div>{props.contacts ? props.contacts : 'No information about his contacts'}</div>
         </div>
       </div>

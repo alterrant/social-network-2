@@ -1,17 +1,28 @@
 import * as React from "react";
 import Authorise from "./Authorise";
 import {connect} from "react-redux";
-import {setAuthUserAndProfile} from "../../../redux/auth";
+import {logOut} from "../../../redux/auth";
 
 class AuthoriseContainer extends React.Component {
-  componentDidMount() {
-
-    this.props.setAuthUserAndProfile(this.props.authoriseStatus);
-  }
 
   render() {
     return (
-        <Authorise {...this.props}/>
+        <Authorise {...this.props} logOut={this.props.logOut}/>
+        //
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //
     )
   }
 }
@@ -25,4 +36,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {setAuthUserAndProfile})(AuthoriseContainer)
+export default connect(mapStateToProps, {logOut})(AuthoriseContainer)

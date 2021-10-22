@@ -1,31 +1,21 @@
 import AddMessageStyle from './AddMessage.module.css';
 import React from 'react';
+import {Field} from "redux-form";
 
 function AddMessage(props) {
 
-    const addNewMessage = () => {
-        props.addNewMessage(props.person);
-    }
-
-    const updateNewMessageTextArea = (e) => {
-        let newMessageRefTextArea = e.target.value;
-        props.updateNewPostMessageTextArea(newMessageRefTextArea);
-    }
     return (
         <div className={AddMessageStyle.textArea}>
+          <form onSubmit={props.handleSubmit}>
             <div>
-                <textarea className={AddMessageStyle.text} onChange={updateNewMessageTextArea}
-                          name="textMessage"
-                          cols="50"
-                          rows="2"
-                          placeholder={'Написать сообщение'}
-                          value={props.textNewMessage}/>
+              <Field component={'input'} name={'addMessageDialog'} placeholder={'Написать сообщение'} autoComplete="off"/>
             </div>
             <div>
-                <button onClick={addNewMessage}>
-                    AddPost
-                </button>
+              <button>
+                Add post
+              </button>
             </div>
+          </form>
         </div>
     )
 }

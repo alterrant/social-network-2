@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import * as React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
-//import {WithAuthRedirectComponent} from "../../hoc/withAuthRedirect";
+import {WithAuthRedirectComponent} from "../../hoc/withAuthRedirect";
 
 class MainContainer extends React.Component {
 
@@ -20,6 +20,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    //WithAuthRedirectComponent,
+    WithAuthRedirectComponent,
     connect(mapStateToProps)
 )(MainContainer);

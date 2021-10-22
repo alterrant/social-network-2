@@ -1,34 +1,29 @@
 import AddMessageStyle from './AddMyPost.module.css';
 import React from 'react';
+import {Field} from "redux-form";
+import {inputText} from "../../../common/FormControl/input";
+import {required, maxLength} from "../../../../utils/validators/validator";
+
+const maxLength20 = maxLength(5);
 
 function AddMyPost(props) {
 
-    const addMyPostMessage = () => {
-        props.addMyPostMessage();
-    }
-
-    const updateNewMessageTextArea = (e) => {
-        let newMessageRefTextArea = e.target.value;
-        props.updateNewMessageTextArea(newMessageRefTextArea);
-    }
-    /*console.log(props.myPosts)*/
-    return (
-        <div className={AddMessageStyle.textArea}>
+  return (
+      <div className={AddMessageStyle.textArea}>
+        <div>
+          <form onSubmit={props.handleSubmit}>
             <div>
-                <textarea className={AddMessageStyle.text} onChange={updateNewMessageTextArea}
-                          name="textMessage"
-                          cols="50"
-                          rows="2"
-                          placeholder={'Написать сообщение'}
-                          value={props.myPosts}/>
+              <Field component={inputText} validate={[maxLength20, required]} placeholder={'Написать сообщение'} autoComplete={'off'} name={'addMyPost'}/>
             </div>
             <div>
-                <button onClick={addMyPostMessage}>
-                    AddPost
-                </button>
+              <button>
+                Add post
+              </button>
             </div>
+          </form>
         </div>
-    )
+      </div>
+  )
 }
 
 export default AddMyPost;

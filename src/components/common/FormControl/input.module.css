@@ -1,0 +1,11 @@
+.error input {
+  border: 3px solid red;
+}
+
+.error {
+  color: red;
+}
+
+.inputArea input {
+  font-family: "Times New Roman"
+}

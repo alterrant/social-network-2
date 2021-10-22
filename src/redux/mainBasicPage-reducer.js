@@ -1,8 +1,7 @@
-import {authAPI, profileAPI, usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 import {preload} from "./users-reducer";
 
 const ADD_MY_POST_MESSAGE = 'ADD-MY-POST-MESSAGE';
-const UPDATE_MY_POST_MESSAGE_TEXT_AREA = 'UPDATE-MY-POST-MESSAGE-TEXT-AREA'
 const GET_USER_PROFILE = 'GET_USER_PROFILE';
 const GET_USER_PROFILE_STATUS = 'GET_USER_PROFILE_STATUS';
 const SET_MY_STATUS = 'SET_MY_STATUS';
@@ -67,9 +66,9 @@ let initialState = {
 
 const mainBasicReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-MY-POST-MESSAGE':
+    case ADD_MY_POST_MESSAGE:
       let myPostNewMessage = {
-        id: '3', message: state.myPosts.textMynewMessage, likes: '0'
+        id: '3', message: action.myNewPost, likes: '0'
       }
       return {
         ...state,
@@ -104,23 +103,18 @@ const mainBasicReducer = (state = initialState, action) => {
 
 export default mainBasicReducer;
 
-export const addMyPostMessageActionCreator = () => ({type: ADD_MY_POST_MESSAGE})
-export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) => {
+export const addMyPostMessage = (myNewPost) => ({type: ADD_MY_POST_MESSAGE, myNewPost})
+/*export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) => {
   return {type: UPDATE_MY_POST_MESSAGE_TEXT_AREA, updateMyPostNewTextMessage: newMessageRefTextArea}
-}
+}*/
 export const setMyStatus = (status) => ({type: SET_MY_STATUS, status})
 
-export const loadMyStatus = () => (dispatch) => {
+export const loadMyStatus = (myId) => (dispatch) => {
 
-  authAPI.auth()
-      .then(receiveMyId => {
-        return receiveMyId.data.data.id})
-      .then(myId => {
         profileAPI.getProfileStatus(myId)
             .then(receivedMyStatus => {
               dispatch(setMyStatus(receivedMyStatus.data));
             })
-      })
 }
 
 export const putMyStatus = (status) => (dispatch) => {

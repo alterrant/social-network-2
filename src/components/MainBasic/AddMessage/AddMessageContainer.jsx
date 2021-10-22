@@ -1,25 +1,25 @@
 import React from 'react';
-import {addNewMessageActionCreator, updateNewMessageTextAreaActionCreator} from "../../../redux/mainPostsPage-reducer";
+import {addNewMessage} from "../../../redux/mainPostsPage-reducer";
 import {connect} from "react-redux";
 import AddMessage from "./AddMessage";
+import {reduxForm} from "redux-form";
+
+const AddMessageContainer = (props) => {
+
+  let addMessage = (formData) => {
+    props.addNewMessage(props.person, formData.addMessageDialog)
+  }
+  return (
+      <AddMessageContainerForm onSubmit={addMessage}/>
+  )
+}
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        textNewMessage: state.mainPostsPage.textNewMessage,
-        person: ownProps.person
-    }
-}
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        addNewMessage: () => {
-            dispatch( addNewMessageActionCreator(ownProps.person) );
-        },
-        updateNewPostMessageTextArea: (newMessageRefTextArea) => {
-            dispatch( updateNewMessageTextAreaActionCreator(newMessageRefTextArea) );
-        }
-    }
+  return {
+    person: ownProps.person
+  }
 }
 
-const AddMessageContainer = connect(mapStateToProps, mapDispatchToProps)(AddMessage);
+const AddMessageContainerForm = reduxForm({form: 'Dialog'})(AddMessage)
 
-export default AddMessageContainer;
+export default connect(mapStateToProps, {addNewMessage})(AddMessageContainer)

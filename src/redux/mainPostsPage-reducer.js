@@ -36,20 +36,19 @@ let initialState = {
 }
 const mainPostsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-MESSAGE':
+    case ADD_MESSAGE:
       let newMessage = {
-        id: '6', name: 'me', message: state.textNewMessage
+        id: '6', name: 'me', message: action.newMessageText
       }
       return {
         ...state,
         messagesData: {
           ...state.messagesData,
-          [action.newMessage]: [
-            ...state.messagesData[action.newMessage],
+          [action.newMessagePerson]: [
+            ...state.messagesData[action.newMessagePerson],
             newMessage
           ]
-        },
-        textNewMessage: ''
+        }
       }
     case 'UPDATE-NEW-TEXT-MESSAGE':
       return {
@@ -86,7 +85,10 @@ const mainPostsReducer = (state = initialState, action) => {
 
 export default mainPostsReducer;
 
-export const addNewMessageActionCreator = (somePerson) => ({type: ADD_MESSAGE, newMessage: somePerson});
+export const addNewMessage = (somePerson, newMessageText) => ({type: ADD_MESSAGE, newMessagePerson: somePerson, newMessageText});
 export const updateNewMessageTextAreaActionCreator = (newMessageRefTextArea) => {
   return {type: UPDATE_NEW_TEXT_MESSAGE, updateNewTextMessage: newMessageRefTextArea}
+}
+export const addNewMessageThunk = (somePerson, newMessageText) => (dispatch) => {
+  dispatch(addNewMessage(somePerson, newMessageText))
 }

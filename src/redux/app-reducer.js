@@ -1,6 +1,6 @@
 import {setAuthUserAndProfile} from "./auth";
 
-const SET_INITIALIZE_SUCCESS = 'SET_INITIALIZE_SUCCESS';
+const SET_INITIALIZE_SUCCESS = 'SOCIAL-NETWORK/APP-REDUCER/SET_INITIALIZE_SUCCESS';
 
 
 let initialState = {
@@ -13,7 +13,7 @@ const appReducer = (state = initialState, action) => {
       return {...state,
         isInitialized: true}
     default:
-      return state
+      return state;
   }
 }
 

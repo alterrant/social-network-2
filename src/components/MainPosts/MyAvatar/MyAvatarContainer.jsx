@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import MyAvatar from "./MyAvatar";
+import {MyAvatar} from "./MyAvatar";
 import {loadMyStatus, putMyStatus, setMyStatus} from "../../../redux/mainBasicPage-reducer";
 import * as React from "react";
 

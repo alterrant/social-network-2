@@ -1,49 +1,42 @@
 import AvatarStyle from './MyAvatar.module.css'
 import * as React from "react";
+import {useReduxContext} from "react-redux/lib/hooks/useReduxContext";
+import {useState} from "react";
 
-export default class MyAvatar extends React.Component {
+export const MyAvatar = (props) => {
 
-  state = {
-    switchStatus: false,
-    myStatus: this.props.myStatus
+  let [switchStatus, setSwitchStatus] = useState(false);
+  let [myStatus, setMyStatus] = useState(props.myStatus);
+
+  const toggle = () => {
+    setSwitchStatus(!switchStatus);
+
+    if (switchStatus) props.putMyStatus(myStatus)
   }
 
-  toggle() {
-    this.setState({
-      switchStatus: !this.state.switchStatus
-    })
-    if (!this.state.switchStatus) {
-      //Ниже вместо set должен быть put
-      this.props.putMyStatus(this.state.myStatus)
-    }
+  const changeStatus = (e) => {
+    setMyStatus(e.currentTarget.value)
   }
 
-  changeStatus = (e) => {
-    this.setState({
-      myStatus: e.currentTarget.value
-    })
-}
 
-  render() {
-    return (
-        <div className={AvatarStyle.wrapper}>
-          <img src={this.props.img} alt="myAvatar"/>
+  return (
+      <div className={AvatarStyle.wrapper}>
+        <img src={props.img} alt="myAvatar"/>
+        <div>
+          <p>{props.description}</p>
           <div>
-            <p>{this.props.description}</p>
-            <div>
-              {(!this.state.switchStatus)
-                  ?
-                  <div>
-                    <span onDoubleClick={() => this.toggle(this)}>{this.props.myStatus || 'Haven\'t status'}</span>
-                  </div>
-                  :
-                  <div>
-                    <input autoFocus={true} onChange={this.changeStatus} onBlur={() => this.toggle(this)} value={this.state.myStatus}/>
-                  </div>
-              }
-            </div>
+            {(!switchStatus)
+                ?
+                <div>
+                  <span onDoubleClick={toggle}>{props.myStatus || 'Haven\'t status'}</span>
+                </div>
+                :
+                <div>
+                  <input autoFocus={true} onChange={changeStatus} onBlur={toggle} value={myStatus}/>
+                </div>
+            }
           </div>
         </div>
-    )
-  }
+      </div>
+  )
 }

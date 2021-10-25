@@ -1,9 +1,9 @@
 import {authAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const AUTHORISE = 'AUTHORISE';
-const SET_AUTH = 'SET_AUTH';
-const GET_AUTH_USER_PROFILE = 'GET_AUTH_USER_PROFILE';
+const AUTHORISE = 'SOCIAL-NETWORK/AUTH/AUTHORISE';
+const SET_AUTH = 'SOCIAL-NETWORK/AUTH/SET_AUTH';
+const GET_AUTH_USER_PROFILE = 'SOCIAL-NETWORK/AUTH/GET_AUTH_USER_PROFILE';
 
 let initialState = {
   icoAutorisedUser: 'https://e7.pngegg.com/pngimages/247/564/png-clipart-computer-icons-user-profile-user-avatar-blue-heroes.png',

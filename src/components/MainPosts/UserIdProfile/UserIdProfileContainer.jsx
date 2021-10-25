@@ -11,6 +11,7 @@ class UserIdProfileContainer extends React.Component {
   }
 
   render() {
+    console.log("RENDER")
     return (
         <>
           {(this.props.preloadStatus) ? <Preloader/> : null}

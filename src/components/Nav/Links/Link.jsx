@@ -1,13 +1,13 @@
 import {NavLink} from "react-router-dom";
 import LinkStyle from './Link.module.css'
 
-function Link(prop) {
+function Link(props) {
   return (
-      <li>
-        <NavLink to={`/` + prop.name}
+      <li key={props.name}>
+        <NavLink to={`/` + props.name}
                  activeClassName={LinkStyle.activeLink}
                  className={`${LinkStyle.liText} ${LinkStyle.translocation}`}>
-          {prop.name}
+          {props.name}
         </NavLink>
       </li>
   );

@@ -5,7 +5,7 @@ import PersonAvaContainer from "./PersonAva/PersonAvaContainer";
 function Persona({img, name}) {
 
     return (
-        <li className={`${PersonaModule.name} ${PersonaModule.active} ${PersonaModule.ava}`}>
+        <li key={img} className={`${PersonaModule.name} ${PersonaModule.active} ${PersonaModule.ava}`}>
             <PersonAvaContainer img={img}/>
             <NavLink
                 to={'/message/' + name}>{name}</NavLink>

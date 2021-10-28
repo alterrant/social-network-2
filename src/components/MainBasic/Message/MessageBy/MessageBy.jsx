@@ -4,7 +4,7 @@ import MessageByStyle from './MessageBy.module.css'
 function MessageBy({name, messageBy}) {
 
     return (
-        <li className={`${name} ${MessageByStyle.li}`}>
+        <li key={name} className={`${name} ${MessageByStyle.li}`}>
                 <div className={`${MessageByStyle.block} ${name}`}><p>{messageBy}</p></div>
         </li>
     )

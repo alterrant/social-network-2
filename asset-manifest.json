@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/alterrant/social-network-2/static/css/main.1badd561.chunk.css",
-    "main.js": "/alterrant/social-network-2/static/js/main.1dce2681.chunk.js",
-    "main.js.map": "/alterrant/social-network-2/static/js/main.1dce2681.chunk.js.map",
+    "main.js": "/alterrant/social-network-2/static/js/main.b0ebf168.chunk.js",
+    "main.js.map": "/alterrant/social-network-2/static/js/main.b0ebf168.chunk.js.map",
     "runtime-main.js": "/alterrant/social-network-2/static/js/runtime-main.120fc60e.js",
     "runtime-main.js.map": "/alterrant/social-network-2/static/js/runtime-main.120fc60e.js.map",
     "static/js/2.332492fd.chunk.js": "/alterrant/social-network-2/static/js/2.332492fd.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.120fc60e.js",
     "static/js/2.332492fd.chunk.js",
     "static/css/main.1badd561.chunk.css",
-    "static/js/main.1dce2681.chunk.js"
+    "static/js/main.b0ebf168.chunk.js"
   ]
 }

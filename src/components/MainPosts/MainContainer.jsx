@@ -20,6 +20,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    //WithAuthRedirectComponent,
+    WithAuthRedirectComponent,
     connect(mapStateToProps)
 )(MainContainer);

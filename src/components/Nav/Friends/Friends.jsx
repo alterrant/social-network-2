@@ -3,7 +3,7 @@ import FriendContainer from "./Friend/FriendContainer";
 
 function Friends({friends}) {
     const friendItem = [
-        friends.map( friendItem => <FriendContainer name={friendItem.name} img={friendItem.img}/>)
+        friends.map( friendItem => <FriendContainer key={friendItem.name} name={friendItem.name} img={friendItem.img}/>)
     ]
 
     return (

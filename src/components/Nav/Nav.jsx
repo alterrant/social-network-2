@@ -4,11 +4,11 @@ import FriendsContainer from "./Friends/FriendsContainer";
 
 function Nav(prop) {
     const navLinks = [
-       prop.links.map( linkName => <LinkContainer name={linkName}/>)
+       prop.links.map( linkName =>  <LinkContainer key={linkName} name={linkName}/>)
     ]
     return (
         <div className = {NavStyle.nav}>
-            <ul className = {NavStyle.ul}>
+            <ul key={1} className = {NavStyle.ul}>
                 { navLinks }
             </ul>
             <FriendsContainer friends={prop.friends}/>

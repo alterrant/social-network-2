@@ -7,7 +7,7 @@ function User(props) {
   return (
       <div className={UserStyle.wrapper}>
         <div className={UserStyle.status_wrapper}>
-          <NavLink to={'/profile/' + `${props.user.id}`}>
+          <NavLink to={`/profile/ ${props.user.id}`}>
             <img className={UserStyle.ava}
                  src={(props.img) ?
                      null

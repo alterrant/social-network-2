@@ -3,7 +3,7 @@ import LinkStyle from './Link.module.css'
 
 function Link(props) {
   return (
-      <li key={props.name}>
+      <li>
         <NavLink to={`/` + props.name}
                  activeClassName={LinkStyle.activeLink}
                  className={`${LinkStyle.liText} ${LinkStyle.translocation}`}>

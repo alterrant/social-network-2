@@ -9,6 +9,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const PersonaContainer = connect(mapStateToProps)(Persona);
-
-export default PersonaContainer;
+export default connect(mapStateToProps)(Persona);

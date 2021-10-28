@@ -8,6 +8,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const PostContainer = connect(mapStateToProps)(Post);
-
-export default PostContainer;
+export default connect(mapStateToProps)(Post);

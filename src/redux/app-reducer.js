@@ -20,11 +20,9 @@ const appReducer = (state = initialState, action) => {
 export default appReducer;
 
 export const successInitializing = () => ({type: SET_INITIALIZE_SUCCESS})
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => async (dispatch) => {
   let promise = dispatch(setAuthUserAndProfile())
 
-  Promise.all([promise])
-      .then(() => {
-        dispatch(successInitializing())
-      })
+  await Promise.all([promise]);
+  dispatch(successInitializing())
 }

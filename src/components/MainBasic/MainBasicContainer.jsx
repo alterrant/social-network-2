@@ -5,6 +5,7 @@ import MainBasic from "./MainBasic";
 import {compose} from "redux";
 
 class MainBasicContainer extends React.Component {
+
   render() {
     return <MainBasic {...this.props}/>
   }

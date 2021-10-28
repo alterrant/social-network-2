@@ -1,10 +1,10 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {preload} from "./users-reducer";
 
-const ADD_MY_POST_MESSAGE = 'ADD-MY-POST-MESSAGE';
-const GET_USER_PROFILE = 'GET_USER_PROFILE';
-const GET_USER_PROFILE_STATUS = 'GET_USER_PROFILE_STATUS';
-const SET_MY_STATUS = 'SET_MY_STATUS';
+const ADD_MY_POST_MESSAGE = 'SOCIAL-NETWORK/MAIN-BASIC-PAGE/ADD-MY-POST-MESSAGE';
+const GET_USER_PROFILE = 'SOCIAL-NETWORK/MAIN-BASIC-PAGE/GET_USER_PROFILE';
+const GET_USER_PROFILE_STATUS = 'SOCIAL-NETWORK/MAIN-BASIC-PAGE/GET_USER_PROFILE_STATUS';
+const SET_MY_STATUS = 'SOCIAL-NETWORK/MAIN-BASIC-PAGE/SET_MY_STATUS';
 
 let initialState = {
   myDescription: {
@@ -13,42 +13,20 @@ let initialState = {
         'on Git https://github.com/alterrant/social-network-2.git\nThank you for watching this and don\'t be mad on me.',
     myStatus: 'Learning React'
   },
-  /*
-  {
-  "aboutMe": null,
-  "contacts": {
-    "facebook": null,
-    "website": null,
-    "vk": null,
-    "twitter": null,
-    "instagram": null,
-    "youtube": null,
-    "github": null,
-    "mainLink": null
-  },
-  "lookingForAJob": false,
-  "lookingForAJobDescription": null,
-  "fullName": "IgorFrezer",
-  "userId": 19787,
-  "photos": {
-    "small": null,
-    "large": null
-  }
-}
-   */
-  // userIdProfile: null,
   userIdProfile: {
     fullName: '1',
     aboutMe: '2',
-    contacts: {facebook: null,
+    contacts: {
+      facebook: null,
       website: null,
       vk: null,
       twitter: null,
       instagram: null,
       youtube: null,
       github: null,
-      mainLink: null},
-    photos: {large:'4'},
+      mainLink: null
+    },
+    photos: {large: '4'},
     userStatus: ''
   },
   userIdProfileStatus: '',
@@ -75,8 +53,8 @@ const mainBasicReducer = (state = initialState, action) => {
         myPosts: {
           ...state.myPosts,
           messages: [
-              ...state.myPosts.messages,
-              myPostNewMessage
+            ...state.myPosts.messages,
+            myPostNewMessage
           ],
           textMynewMessage: ''
         }
@@ -104,44 +82,30 @@ const mainBasicReducer = (state = initialState, action) => {
 export default mainBasicReducer;
 
 export const addMyPostMessage = (myNewPost) => ({type: ADD_MY_POST_MESSAGE, myNewPost})
-/*export const updateMyPostMessageTextAreaActionCreator = (newMessageRefTextArea) => {
-  return {type: UPDATE_MY_POST_MESSAGE_TEXT_AREA, updateMyPostNewTextMessage: newMessageRefTextArea}
-}*/
 export const setMyStatus = (status) => ({type: SET_MY_STATUS, status})
 
-export const loadMyStatus = (myId) => (dispatch) => {
-
-        profileAPI.getProfileStatus(myId)
-            .then(receivedMyStatus => {
-              dispatch(setMyStatus(receivedMyStatus.data));
-            })
+export const loadMyStatus = (myId) => async (dispatch) => {
+  let receivedMyStatus = await profileAPI.getProfileStatus(myId);
+  dispatch(setMyStatus(receivedMyStatus.data));
 }
 
-export const putMyStatus = (status) => (dispatch) => {
-  profileAPI.setProfileStatus(status)
-      .then(recevedStatus => {
-        if (recevedStatus.data.resultCode === 0) dispatch(setMyStatus(status))
-          }
-      )
+export const putMyStatus = (status) => async (dispatch) => {
+  const receivedStatus = await profileAPI.setProfileStatus(status);
+  if (receivedStatus.data.resultCode === 0) dispatch(setMyStatus(status));
 }
 
 
 export const getUserProfile = (userIdProfile) => ({type: GET_USER_PROFILE, userIdProfile})
 export const getUserProfileStatus = (userId) => ({type: GET_USER_PROFILE_STATUS, userId})
-export const loadUserProfile = (userId) => (dispatch) => {
-  preload(true)
+export const loadUserProfile = (userId) => async (dispatch) => {
+  preload(true);
 
-  usersAPI.getProfile(userId)
-      .then(received => {
-            dispatch(getUserProfile(received));
-          }
-      )
-  //сделал не через then, чтобы успевало прогрузиться
-  profileAPI.getProfileStatus(userId)
-      .then(receivedStatus => {
-        dispatch(getUserProfileStatus(receivedStatus.data))
-        preload(false)
-      }
-  )
+  const received = await usersAPI.getProfile(userId);
+  dispatch(getUserProfile(received));
+
+  const receivedStatus = await profileAPI.getProfileStatus(userId);
+  dispatch(getUserProfileStatus(receivedStatus.data));
+
+  preload(false);
 }
 

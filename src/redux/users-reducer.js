@@ -1,11 +1,11 @@
 import {usersAPI} from "../api/api";
 
-const SET_USERS = 'SET_USERS';
-const SET_TOGGLE = 'SET_TOGGLE';
-const GET_USERS = 'GET_USERS';
-const CHANGE_CURRENT_PAGE = 'CHANGE_USERS_PAGE';
-const PRELOAD = 'PRELOAD';
-const LOADING_USERS = 'LOADING_USERS'
+const SET_USERS = 'SOCIAL-NETWORK/USERS-REDUCER/SET_USERS';
+const SET_TOGGLE = 'SOCIAL-NETWORK/USERS-REDUCER/SET_TOGGLE';
+const GET_USERS = 'SOCIAL-NETWORK/USERS-REDUCER/GET_USERS';
+const CHANGE_CURRENT_PAGE = 'SOCIAL-NETWORK/USERS-REDUCER/CHANGE_USERS_PAGE';
+const PRELOAD = 'SOCIAL-NETWORK/USERS-REDUCER/PRELOAD';
+const LOADING_USERS = 'SOCIAL-NETWORK/USERS-REDUCER/LOADING_USERS';
 
 let initialState = {
   users: [
@@ -23,7 +23,7 @@ let initialState = {
         }
       }*/
   ],
-  totalCount: 0,
+  totalCount: 21,
   currentPage: 1,
   pageSize: 4,
   isFetch: false,
@@ -50,19 +50,16 @@ const usersReducer = (state = initialState, action) => {
     case GET_USERS:
       return {...state, totalCount: action.totalUsers}
     case CHANGE_CURRENT_PAGE:
-      debugger
       return {...state, currentPage: action.currentPage}
     case PRELOAD:
       return {...state, isFetch: action.preloadStatus}
     case LOADING_USERS:
       return {
-        ...state, followingUsers: action.isLoadingRequest
-            ? [...state.followingUsers, action.loadingUserId]
-            : state.followingUsers.filter((id) => id !== action.loadingUserId)
+        ...state, followingUsers: action.isLoadingRequest ?
+            [...state.followingUsers, action.loadingUserId]
+            :
+            state.followingUsers.filter((id) => id !== action.loadingUserId)
       }
-    case 'SHOW-MORE-USERS':
-      return {...state};
-
     default:
       return state;
   }
@@ -78,34 +75,31 @@ export const preload = (preloadStatus) => ({type: PRELOAD, preloadStatus})
 export const loadingUsers = (isLoadingRequest, loadingUserId) => (
     {type: LOADING_USERS, isLoadingRequest, loadingUserId}
 )
-export const following = (userId) => (dispatch) => {
+export const following = (userId) => async (dispatch) => {
 
   dispatch(loadingUsers(true, userId));
 
-  usersAPI.follow(userId)
-      .then(() => {
-        dispatch(userSubscriber(userId));
-        dispatch(loadingUsers(false, userId));
-      })
+  await usersAPI.follow(userId);
+
+  dispatch(userSubscriber(userId));
+  dispatch(loadingUsers(false, userId));
 }
-export const unfollowing = (userId) => (dispatch) => {
+export const unfollowing = (userId) => async (dispatch) => {
 
   dispatch(loadingUsers(true, userId));
 
-  usersAPI.unfollow(userId)
-      .then(() => {
-        dispatch(userSubscriber(userId));
-        dispatch(loadingUsers(false, userId));
-      })
+  await usersAPI.unfollow(userId);
+
+  dispatch(userSubscriber(userId));
+  dispatch(loadingUsers(false, userId));
 }
-export const loadUsers = (pageSize, currentPage) => (dispatch) => {
+export const loadUsers = (pageSize, currentPage) => async (dispatch) => {
 
   dispatch(preload(true));
 
-  usersAPI.getUsers(pageSize, currentPage)
-      .then((response) => {
-        dispatch(setUsers(response.items));
-        dispatch(getUsers(response.totalCount));
-        dispatch(preload(false));
-      })
+  const response = await usersAPI.getUsers(pageSize, currentPage)
+
+  dispatch(setUsers(response.items));
+  dispatch(getUsers(response.totalCount));
+  dispatch(preload(false));
 }

@@ -8,6 +8,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const MessageByContainer = connect(mapStateToProps)(MessageBy)
-
-export default MessageByContainer;
+export default connect(mapStateToProps)(MessageBy)

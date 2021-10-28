@@ -3,7 +3,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 
 let mapStateToPropsRedirect = (state) => ({
-    authorised: state.auth.authoriseStatus
+    authorised: state.auth.userData.authoriseStatus
 })
 
 export const WithAuthRedirectComponent = (Component) => {

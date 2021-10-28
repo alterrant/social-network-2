@@ -4,10 +4,10 @@ import {addMyPostMessage} from "../../../../redux/mainBasicPage-reducer";
 import {reduxForm} from "redux-form";
 import AddMyPost from "./AddMyPost";
 
-const AddMyPostContainer = (props) => {
+const AddMyPostContainer = ({addMyPostMessage}) => {
 
   let addMyPost = (value) => {
-    props.addMyPostMessage(value.addMyPost)
+    addMyPostMessage(value.addMyPost)
   }
 
   return (

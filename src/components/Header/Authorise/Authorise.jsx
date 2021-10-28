@@ -1,28 +1,28 @@
 import {NavLink} from "react-router-dom";
 
-const Authorise = (props) => {
-  if (props.authoriseStatus && props.authUserProfile !== undefined) {
+const Authorise = ({authoriseStatus, authUserProfile, logOut, icoAutorisedUser, icoUnutorisedUser}) => {
+  if (authoriseStatus && authUserProfile !== undefined) {
 
     return (
         <div>
           {
-            (props.authUserProfile.photos.large) ?
-                <img src={props.authUserProfile.photos.large} alt="authIco"/>
+            (authUserProfile.photos.large) ?
+                <img src={authUserProfile.photos.large} alt="authIco"/>
                 :
-                <img src={props.icoAutorisedUser} alt="authIco"/>
+                <img src={icoAutorisedUser} alt="authIco"/>
           }
-          <button onClick={props.logOut}>
-            {(props.authoriseStatus) ? 'Logout' : 'LogIn'}
+          <button onClick={logOut}>
+            {(authoriseStatus) ? 'Logout' : 'LogIn'}
           </button>
         </div>
     )
   } else {
     return (
         <div>
-          <img src={props.icoUnutorisedUser} alt="authIco"/>
+          <img src={icoUnutorisedUser} alt="authIco"/>
           <NavLink to={'/login'}>
             <button>
-              {(props.authoriseStatus) ? 'Logout' : 'LogIn'}
+              {(authoriseStatus) ? 'Logout' : 'LogIn'}
             </button>
           </NavLink>
         </div>

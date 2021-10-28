@@ -4,7 +4,7 @@ import {Field} from "redux-form";
 import {inputText} from "../../../common/FormControl/input";
 import {required, maxLength} from "../../../../utils/validators/validator";
 
-const maxLength20 = maxLength(5);
+const maxLength20 = maxLength(20);
 
 function AddMyPost(props) {
 

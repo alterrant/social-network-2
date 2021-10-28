@@ -7,11 +7,10 @@ import Preloader from "../../common/Preloader/Preloader";
 class UserIdProfileContainer extends React.Component {
 
   componentDidMount() {
-    this.props.loadUserProfile(this.props.userId)
+    if(this.props.authoriseStatus) this.props.loadUserProfile(this.props.userId)
   }
 
   render() {
-    console.log("RENDER")
     return (
         <>
           {(this.props.preloadStatus) ? <Preloader/> : null}
@@ -32,7 +31,8 @@ const mapStateToProps = (store) => {
     contacts: store.mainBasicPage.userIdProfile.contacts,
     photos: store.mainBasicPage.userIdProfile.photos.large,
     userStatus: store.mainBasicPage.userIdProfileStatus,
-    preloadStatus: store.usersPage.isFetch
+    preloadStatus: store.usersPage.isFetch,
+    authoriseStatus: store.auth.userData.authoriseStatus
   }
 }
 

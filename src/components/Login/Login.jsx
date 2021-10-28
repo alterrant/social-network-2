@@ -9,18 +9,9 @@ import {Redirect} from "react-router-dom";
 const LoginField = (props) => {
   return (
       <form onSubmit={props.handleSubmit}>
-        <div>
-          {/*<label>LoginLabel</label>*/}
-          <Field component={inputText} validate={email} placeholder={'Email'} name={'email'}/>
-
-        </div>
-        <div>
-          {/*<label>PasswordLabel</label>*/}
-          <Field component={inputText} placeholder={'Password'} name={'password'} type={'password'}/>
-        </div>
-        <div>
-          <Field component={"input"} type="checkbox" name={'rememberLogin'}/><span>Remember Me</span>
-        </div>
+        <Field component={inputText} validate={email} placeholder={'Email'} name={'email'}/>
+        <Field component={inputText} placeholder={'Password'} name={'password'} type={'password'}/>
+        <Field component={"input"} type="checkbox" name={'rememberLogin'}/><span>Remember Me</span>
         <div>
           <div>
             {props.error}
@@ -41,19 +32,8 @@ const LoginFieldContainer = (props) => {
     if (formData.email && formData.password) props.logIn(formData.email, formData.password)
   }
 
-  /*const logOutButton = () => {
-    props.logOut();
-  }*/
-
   if (props.isAuth) {
-
     return <Redirect to={'/profile'}/>
-    /*return (
-        <>
-          <h1>LOGOUT</h1>
-          <LoginReduxForm onSubmit={logOutButton} title={'Logout'}/>
-        </>
-    )*/
   } else {
     return (
         <>
@@ -66,7 +46,7 @@ const LoginFieldContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.authoriseStatus,
+    isAuth: state.auth.userData.authoriseStatus,
   }
 }
 

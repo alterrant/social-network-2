@@ -1,5 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_TEXT_MESSAGE = 'UPDATE-NEW-TEXT-MESSAGE';
+const ADD_MESSAGE = 'SOCIAL-NETWORK/MAIN-POST-PAGE/ADD-MESSAGE';
 
 let initialState = {
   personsData: [
@@ -46,49 +45,18 @@ const mainPostsReducer = (state = initialState, action) => {
           ...state.messagesData,
           [action.newMessagePerson]: [
             ...state.messagesData[action.newMessagePerson],
-            newMessage
-          ]
+            newMessage]
         }
       }
-    case 'UPDATE-NEW-TEXT-MESSAGE':
-      return {
-        ...state,
-        textNewMessage: action.updateNewTextMessage
-      }
     default:
       return state;
   }
 }
-
-/*
-* const mainBasicReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD-MY-POST-MESSAGE': {
-      let stateCopy = JSON.parse(JSON.stringify(state));
-      let myPostNewMessage = {
-        id: '3', message: stateCopy.myPosts.textMynewMessage, likes: '0'
-      }
-      stateCopy.myPosts.messages.push(myPostNewMessage);
-      stateCopy.myPosts.textMynewMessage = '';
-      return stateCopy;
-    }
-    case 'UPDATE-MY-POST-MESSAGE-TEXT-AREA': {
-      let stateCopy = JSON.parse(JSON.stringify(state));
-      stateCopy.myPosts.textMynewMessage = action.updateMyPostNewTextMessage;
-      return stateCopy;
-    }
-    default:
-      return state;
-  }
-}
-* */
 
 export default mainPostsReducer;
 
-export const addNewMessage = (somePerson, newMessageText) => ({type: ADD_MESSAGE, newMessagePerson: somePerson, newMessageText});
-export const updateNewMessageTextAreaActionCreator = (newMessageRefTextArea) => {
-  return {type: UPDATE_NEW_TEXT_MESSAGE, updateNewTextMessage: newMessageRefTextArea}
-}
-export const addNewMessageThunk = (somePerson, newMessageText) => (dispatch) => {
-  dispatch(addNewMessage(somePerson, newMessageText))
-}
+export const addNewMessage = (somePerson, newMessageText) => ({
+  type: ADD_MESSAGE,
+  newMessagePerson: somePerson,
+  newMessageText
+});

@@ -6,7 +6,7 @@ import * as React from "react";
 class MyAvatarContainer extends React.Component {
 
   componentDidMount() {
-    this.props.loadMyStatus(this.props.myId)
+    if(this.props.authoriseStatus) this.props.loadMyStatus(this.props.myId)
   }
 
   render() {
@@ -21,7 +21,8 @@ const mapStateToProps = (store) => {
     img: store.mainBasicPage.myDescription.img,
     description: store.mainBasicPage.myDescription.description,
     myStatus: store.mainBasicPage.myDescription.myStatus,
-    myId: store.auth.userData.userId
+    myId: store.auth.userData.userId,
+    authoriseStatus: store.auth.userData.authoriseStatus
   }
 }
 

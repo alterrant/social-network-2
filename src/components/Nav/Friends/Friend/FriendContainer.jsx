@@ -8,6 +8,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const FriendContainer = connect(mapStateToProps)(Friend);
-
-export default FriendContainer;
+export default connect(mapStateToProps)(Friend);

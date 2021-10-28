@@ -14,12 +14,12 @@ class MainContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    authorised: state.auth.authoriseStatus
+    authorised: state.auth.userData.authoriseStatus
   }
 }
 
 export default compose(
     withRouter,
-    WithAuthRedirectComponent,
+    //WithAuthRedirectComponent,
     connect(mapStateToProps)
 )(MainContainer);

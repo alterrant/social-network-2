@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.currentPage {
+  font-weight: bold;
+}
+
+.commonPages {
+  font-size: larger;
+  border: 2px solid dimgray;
+  border-radius: 17%;
+}
+.commonPages :hover {
+  height: 100px;
+}
+
+.wrapperElements {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  justify-content: space-between;
+}

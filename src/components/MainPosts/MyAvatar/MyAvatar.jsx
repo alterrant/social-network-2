@@ -1,6 +1,5 @@
 import AvatarStyle from './MyAvatar.module.css'
 import * as React from "react";
-import {useReduxContext} from "react-redux/lib/hooks/useReduxContext";
 import {useState} from "react";
 
 export const MyAvatar = (props) => {

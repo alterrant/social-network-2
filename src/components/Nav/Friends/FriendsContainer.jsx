@@ -7,6 +7,4 @@ const mapStateToProps = (state) =>{
   }
 }
 
-const FriendsContainer = connect(mapStateToProps)(Friends);
-
-export default FriendsContainer;
+export default connect(mapStateToProps)(Friends);

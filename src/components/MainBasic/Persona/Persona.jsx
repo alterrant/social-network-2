@@ -2,13 +2,13 @@ import PersonaModule from "./Persona.module.css";
 import {NavLink} from "react-router-dom";
 import PersonAvaContainer from "./PersonAva/PersonAvaContainer";
 
-function Persona(prop) {
+function Persona({img, name}) {
 
     return (
         <li className={`${PersonaModule.name} ${PersonaModule.active} ${PersonaModule.ava}`}>
-            <PersonAvaContainer img={prop.img}/>
+            <PersonAvaContainer img={img}/>
             <NavLink
-                to={'/message/' + prop.name}>{prop.name}</NavLink>
+                to={'/message/' + name}>{name}</NavLink>
         </li>
     )
 }

@@ -1,17 +1,11 @@
 import reportWebVitals from './reportWebVitals';
 import React from 'react';
-import store from "./redux/store-reduxe";
 import ReactDOM from "react-dom";
-import App from "./App";
-import {BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux";
+import AppContainer from "./App";
 
+//BrouserRouter с basename={process.env.PUBLIC_URL}
 ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    </BrowserRouter>,
+    <AppContainer />,
     document.getElementById('root')
 );
 
